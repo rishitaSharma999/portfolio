@@ -1,13 +1,14 @@
 // Import the required modules
 const express = require("express")
-const router = express.Router()
+const router = express.Router()//Creates a new Express.js router instance.
 
 // Import the required controllers and middleware functions
 const {
   login,
   signup,
   sendotp,
-} = require("../controllers/Auth")
+} = require("../controllers/Auth") //n web development, a controller is a component that handles incoming requests and sends responses. Controllers are responsible for receiving input, processing it, and returning a response to the client. They act as an intermediary between the client and the application's business logic.
+                                   // the business the logc is written in the controller 
 const {
   resetPasswordToken,
   resetPassword,
@@ -18,7 +19,7 @@ const { auth } = require("../middlewares/auth")
 // Routes for Login, Signup, and Authentication
 
 
-// Route for user login
+// Route for user login,when the /login link gets called then it has to go to login function we imported
 router.post("/login", login)
 
 // Route for user signup
