@@ -1,7 +1,7 @@
 const mailSender = require("../utils/mailSender")
 
 exports.contactUsController = async (req, res) => {
-  const { email, firstname, lastname, message, phoneNo, countrycode } = req.body
+  const { email, firstname, lastname, message, phoneNo } = req.body
   console.log(req.body)
   try {
     const emailRes = await mailSender(
@@ -15,11 +15,11 @@ exports.contactUsController = async (req, res) => {
       thank you for choosing S.S tutorials`
     )
     const mailSendToOwner = await mailSender(
-      "shiwangsharma04@gmail.com","issue in S.S tutorials",
-      `user is facing a issue in your app , the user details and the issue faced are as follows:
+      "rishita2004sharma@gmail.com","issue in Rishita's portfolio",
+      `user is contacting , the user details and the issue faced are as follows:
       ${firstname} ${lastname}
-      ${countrycode}  - ${phoneNo}
-      the issue is : ${message}`
+       - ${phoneNo}
+      the message is : ${message}`
     ) 
     console.log("Email Res ", emailRes)
     return res.json({

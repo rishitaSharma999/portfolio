@@ -1,25 +1,38 @@
+const cors = require("cors");
 const express= require("express");
 const app = express();
 
-const userRoutes = require("../dummy/routes/User");//This line imports a module that defines routes for user-related functionality. 
 
 
-const database = require("../dummy/config/database");//This line imports a module that configures the database connection.
+const contactRoutes=require("../dummy/routes/Contact")
+console.log("inside index of backend");
+
+
+
 const cookieParser = require("cookie-parser");//This line imports the cookie-parser middleware, which is used to parse cookies sent in HTTP requests.
 
 const dotenv = require("dotenv");//Env files, short for environment files, are configuration files that store sensitive information, such as database credentials, API keys, and other settings, as key-value pairs. 
 
 dotenv.config();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 
 
-database.dbConnect();
+
 
 app.use(express.json());{/*In Express.js, when a client sends a request to the server, the request body is sent in a format that needs to be parsed and understood by the server. By default, Express.js doesn't know how to parse the request body, so we need to tell it how to do so.app.use(express.json()); is a middleware function that enables JSON parsing for incoming requests. */}
 app.use(cookieParser());//express.json() middleware to parse the JSON data into a JavaScript object.The parsed JSON data is then stored in the req.body property, which is an object that contains the parsed data.
+app.use(
+    cors({
+        origin:["http://localhost:3000", "https://rishita.vercel.app"],
+        credentials:true
+    })
+)
 
 
-app.use("/api/v1/auth",userRoutes);//This line mounts the userRoutes module at the /api/v1/auth path. This means that any requests to this path will be handled by the routes defined in the userRoutes module.
+
+
+app.use("/api/v1/",contactRoutes)
+
 
 
 app.get("/",(req,res)=>{
@@ -31,7 +44,7 @@ app.get("/",(req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log("App is running at port 4000")
+    console.log("App is running at port 4001")
 })
 
 {/* Routing is the process of determining how an application responds to a client request, typically a web browser or mobile app, based on the requested URL and HTTP method. It's like a traffic cop that directs incoming requests to the appropriate handler or controller, which then generates a response. */}
