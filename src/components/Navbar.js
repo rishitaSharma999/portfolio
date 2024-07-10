@@ -71,7 +71,7 @@ import { useState, useEffect } from "react";
                 console.log("connect");
               }}
             >
-              <span> <Nav.Link key="connect" href="#connect" className={activeLink==='connect'? 'active navbar-link' : 'navbar-link'} onClick={()=> onUpdateActiveLink('connect')} >Let's Connect</Nav.Link></span>
+              <span> <Nav.Link key="connect" href="#connect"  className={activeLink==='connect'? 'active navbar-link' : 'navbar-link'} onClick={()=> onUpdateActiveLink('connect')} >Let's Connect</Nav.Link></span>
             </button>
           </span>
         </Navbar.Collapse>

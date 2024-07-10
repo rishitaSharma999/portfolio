@@ -48,7 +48,6 @@ export const About = () => {
                 <ListGroup.Item style={{ backgroundColor: '#545454', color: '#a3bdd6' }}>Name: Rishita Sharma</ListGroup.Item>
                 <ListGroup.Item style={{ backgroundColor: '#545454', color: '#a3bdd6' }}>College: SGSITS,Indore,M.P.</ListGroup.Item>
                 <ListGroup.Item style={{ backgroundColor: '#545454', color: '#a3bdd6' }}>Degree: B.tech, Computer Science</ListGroup.Item>
-                <ListGroup.Item style={{ backgroundColor: '#545454', color: '#a3bdd6' }}>Phone Number: 9617541456</ListGroup.Item>
                 <ListGroup.Item style={{ backgroundColor: '#545454', color: '#a3bdd6' }}>Email: rishita2004sharma@gmail.com</ListGroup.Item>
               </ListGroup>
             </p>

@@ -5,6 +5,8 @@ import "react-multi-carousel/lib/styles.css";
 import meter1 from '../assets/img/ggb36ie4.png'
 import meter2 from '../assets/img/327vi3yu.png'
 import meter3 from '../assets/img/github.png'
+import meter4 from '../assets/img/codechef-icon.png'
+import meter5 from '../assets/img/OIP.jpg'
 import colorSharp from  '../assets/img/color-sharp.png'
 
 export const Skills=()=>{
@@ -38,7 +40,7 @@ export const Skills=()=>{
                <h2>
                 Skills
                </h2>
-               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos dignissimos, laborum accusantium hic consequatur qui quidem minus tempore natus harum rem ipsum ut dicta corrupti perspiciatis esse porro voluptas nostrum!</p>
+               <p>A showcase of my technical skills, with a focus on innovation, creativity, and results-driven solutions.</p>
                <Carousel responsive={responsive} infinite={true} className="skill-slider" autoPlay={true} autoPlaySpeed={3000} autoPlayTimeout={5000}>
                 <div className="item">
                     <img src={meter1} alt="Image" />
@@ -56,7 +58,7 @@ export const Skills=()=>{
                 </div>
                 <div className="item">
                     <img src={meter2} alt="Image" />
-                    <h5>Data Structures and Algorithms</h5>
+                    <h5>Data Structures and Algorithms-JAVA</h5>
                     <p> 
                       <ul>
                         <li>Arrays</li>
@@ -81,19 +83,25 @@ export const Skills=()=>{
                     </p>
                 </div>
                 <div className="item">
-                    <img src={meter1} alt="Image" />
+                    <img src={meter4}  alt="Image" />
                     <h5>Competitve Programming</h5>
                     <p>
                       <ul>
                         <li>Highest score,codechef :1460</li>
-                        <li>2 star coder</li>
+                        
                       </ul>
                     </p>
                 </div>
                 <div className="item">
-                    <img src={meter1} alt="Image" />
+                    <img src={meter5} alt="Image" />
                     <h5>Back-End</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sed! Ipsam sit nemo deserunt, repellendus libero voluptas autem iur</p>
+                    <p>
+                    <ul>
+                        <li>Node-js</li>
+                        <li>Express</li>
+                        <li>Mongo-DB</li>
+                      </ul>
+                      </p>
                 </div>
                 
                </Carousel>

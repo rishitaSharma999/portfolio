@@ -1,92 +1,140 @@
-import { useState } from "react"
-import { Container,Row,Col } from "react-bootstrap"
-import contactImg from "../assets/img/contact-img.svg"
+import { useState,useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import contactImg from "../assets/img/contact-img.svg";
+import { useForm } from "react-hook-form";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 
-export const Contact=()=>{
-    const formInitialDetails={
-        firstName:'',
-        lastName:'',
-        email:'',
-        phone:'',
-        message:''
+import { apiConnector } from "../services/apiconnector";
+import { contactusEndpoint } from "../services/apis";
+
+export const Contact = () => {
+  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm();
+
+  const submitContactForm = async (data) => {
+    console.log("Form Data - ", data);
+    try {
+      setLoading(true);
+      const res = await apiConnector(
+        "POST",
+        contactusEndpoint.CONTACT_US_API,
+        data
+      );
+      console.log("Email Res - ", res);
+      //toast.success("Email sent successfully")
+      alert("Email sent successfully");
+      setLoading(false);
+    } catch (error) {
+      console.log("ERROR MESSAGE - ", error.message);
+      //toast.success("Error in sending email");
+      alert("Error in sending email");
+      setLoading(false);
     }
-    const [formDetails,setFormDetails]=useState(formInitialDetails)
-    const[buttonText,setButtonText]=useState('Send');
-    const [status,setStatus]=useState({})
+  };
 
-    const onFormUpdate=(catogory,value)=>{
-         setFormDetails({
-            ...formDetails,
-            [catogory]:value
-         })
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({
+        email: "",
+        firstname: "",
+        lastname: "",
+        message: "",
+        phoneNo: "",
+      });
     }
-  
-    const handleSubmit= async (e)=>{
-         e.preventDefault();
-         setButtonText('Sending...')
-         const response= await fetch("http://localhost:3000/contact",{
-            method: "POST",
-            headers:{
-                "Content-Type": "Application/json;charset=utf-8",
-            },
-            body: JSON.stringify(formDetails)
-         });
-         
-         setButtonText("Send");
-          const result=response.json();
-          setFormDetails(formInitialDetails)
-          if(result.code===200){
-            setStatus({success :true,message : 'Message sent Successfully'})
-          }
-          else{
-            setStatus({success: false,message : 'Something went wrong,please try again later'})
-          }
-
-    }
-   
+  }, [reset, isSubmitSuccessful]);
 
 
- return(
-     <section className="contact" id="connect">
-        <Container>
-            <Row className="align-items-center">
-                <Col md={6}>
-                  <img src={contactImg} alt="Contact Us" />
+  return (
+    <section className="contact" id="connect">
+      <Container>
+        <Row className="align-items-center">
+          <Col md={6}>
+            <img src={contactImg} alt="Contact Us" />
+          </Col>
+          <Col md={6}>
+            <h2>Get In Touch</h2>
+            <form onSubmit={handleSubmit(submitContactForm)}>
+              <Row>
+                <Col sm={6} className="px-1">
+                  <input
+                    type="text"
+                    name="firstname"
+                    id="firstname"
+                    placeholder="Enter first name"
+                    className="w-full rounded-[0.5rem] bg-blue-700 p-[12px]  text-emerald-200"
+                    {...register("firstname", { required: true })}
+                  ></input>
                 </Col>
-                <Col md={6}>
-                  <h2>Get In Touch</h2>
-                  <form onSubmit={handleSubmit}>
-                     <Row>
-                        <Col sm={6} className="px-1">
-                        <input type="text" value={formDetails.firstName} placeholder="First Name" onChange={(e)=>{onFormUpdate('firstName', e.target.value)}}></input>
-                        </Col>
-                        <Col sm={6} className="px-1">
-                        <input type="text" value={formDetails.lastName} placeholder="Last Name" onChange={(e)=>{onFormUpdate('lastName', e.target.value)}}></input>
-                        </Col>
-                        <Col sm={6} className="px-1">
-                        <input type="email" value={formDetails.email} placeholder="Email Address" onChange={(e)=>{onFormUpdate('email', e.target.value)}}></input>
-                        </Col>
-                        <Col sm={6} className="px-1">
-                       {/* telephone */} <input type="tel" value={formDetails.phone} placeholder="Phone No." onChange={(e)=>{onFormUpdate('phone', e.target.value)}}></input>
-                        </Col>
-                        <Col>
-                        <textarea row="6" value={formDetails.message} placeholder="Message" onChange={(e)=>{onFormUpdate('message', e.target.value)}} ></textarea>
-                        <button type="submit"> <span>{buttonText}</span> </button>
-                        </Col>
-                        {
-                            status.message &&
-                            <Col>
-                            <p className={status.success===false ? "danger" : "success"}>{status.message}</p>
-                            </Col>
-                        }
-                     </Row>
-                  </form>
+                <Col sm={6} className="px-1">
+                  <input
+                    type="text"
+                    name="lastname"
+                    id="lastname"
+                    placeholder="Enter last name"
+                    className="w-full rounded-[0.5rem] bg-blue-700 p-[12px]  text-emerald-200"
+                    {...register("lastname")}
+                  ></input>
                 </Col>
-            </Row>
-        </Container>
-
-     </section>
- )
-}
-export default Contact
+                <Col sm={6} className="px-1">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Enter email address"
+                    className="w-full rounded-[0.5rem] bg-blue-700 p-[12px]  text-emerald-200"
+                    {...register("email", { required: true })}
+                  ></input>
+                </Col>
+                <Col sm={6} className="px-1">
+                  {/* telephone */}{" "}
+                  <input
+                    type="tel"
+                    name="phonenumber"
+                    id="phonenumber"
+                    placeholder="12345 67890"
+                    className="w-full rounded-[0.5rem] bg-blue-700 p-[12px]  text-emerald-200"
+                    {...register("phoneNo", {
+                      required: {
+                        value: true,
+                        message: "Please enter your Phone Number.",
+                      },
+                      maxLength: { value: 12, message: "Invalid Phone Number" },
+                      minLength: { value: 10, message: "Invalid Phone Number" },
+                    })}
+                  ></input>
+                </Col>
+                <Col>
+                  <textarea
+                    as="textarea"
+                    aria-label="With textarea"
+                    name="message"
+                    id="message"
+                    cols="30"
+                    rows="3"
+                    placeholder="Enter your message here"
+                    className=" input-group-text-area"
+                    style={{ width: "100%" }}
+                    {...register("message", { required: true })}
+                  ></textarea>
+                  <button type="submit">
+                    
+                    <span>Submit</span>{" "}
+                  </button>
+                </Col>
+              </Row>
+            </form>
+          </Col>
+        </Row>
+      </Container>
+    </section>
+  );
+};
+export default Contact;

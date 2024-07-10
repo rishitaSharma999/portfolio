@@ -66,7 +66,7 @@ export const Banner=()=>{
               <span className="tagline">Rishita Sharma</span>
               {/* <h1>{`Hi I'm webcoded `} <span className="wrap">{text}</span> </h1> */}
               <p>Currently pursuing B.Tech in Computer Science from Shri G.S. Institute of Technology and Science, graduating in 2026. Enthusiastic and passionate coder with an interest in exploring the Web Development field and improving my problem-solving skills. </p>
-               <button onClick={()=>console.log("connect")}><a href={CV} download="Rishita_Sharma_CV.pdf"  className="download-link">Download CV</a> < ArrowRightCircle size={25} /></button>
+               <button onClick={()=>console.log("connect")}><a href={CV} download="Rishita_Sharma_CV.pdf"  className="download-link" >Download CV</a> < ArrowRightCircle size={25} /></button>
               </Col>
             </Row>
          </Container>
